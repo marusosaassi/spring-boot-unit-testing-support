@@ -3,6 +3,7 @@ package com.marusosa.component;
 import com.marusosa.component.models.CollegeStudent;
 import com.marusosa.component.models.StudentGrades;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 //@SpringBootTest(classes=MvcTestingExampleApplication.class)
 @SpringBootTest
@@ -49,6 +53,19 @@ public class ApplicationExampleTest {
         student.setStudentGrades(studentGrades);
     }
 
+    @DisplayName("Add grade results for student grades")
     @Test
-    void basicTest() {}
+    public void addGradeResultsForStudentGrades() {
+        assertEquals(371.25, studentGrades.addGradeResultsForSingleClass(
+            student.getStudentGrades().getMathGradeResults()
+        ));
+    }
+
+    @DisplayName("Add grade results for student grades not equal")
+    @Test
+    public void addGradeResultsForStudentGradesAssertNotEquals() {
+        assertNotEquals(0, studentGrades.addGradeResultsForSingleClass(
+            student.getStudentGrades().getMathGradeResults()
+        ));
+    }
 }
